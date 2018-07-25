@@ -21,6 +21,13 @@ flog_error(...)
 
 flog_fatal(...)
 }
+\arguments{
+\item{logger}{The loging function to use.}
+
+\item{...}{Message passed to the logger via `c(...)`.}
+
+\item{name}{The name of the logger to use.}
+}
 \description{
 These are wrappers around [futile.logger::flog_error()] and friends. They
 write to the background logger by default and use `...` for message creation.

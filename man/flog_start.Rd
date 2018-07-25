@@ -5,7 +5,14 @@
 \title{Start logging}
 \usage{
 flog_start(threshold = futile.logger::INFO, name = background_file_logger(),
-  msg = "Started drake::make() ")
+  msg = "Started logging run")
+}
+\arguments{
+\item{threshold}{The new threshold for the given logger.}
+
+\item{name}{The name of the logger.}
+
+\item{msg}{An initial message to pass to the logger.}
 }
 \description{
 Start logging

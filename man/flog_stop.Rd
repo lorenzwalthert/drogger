@@ -4,7 +4,12 @@
 \alias{flog_stop}
 \title{Stop Logging}
 \usage{
-flog_stop(name = background_file_logger(), msg = "Completed drake::make() ")
+flog_stop(name = background_file_logger(), msg = "Completed logging run")
+}
+\arguments{
+\item{name}{The name of the logger.}
+
+\item{msg}{An initial message to pass to the logger.}
 }
 \description{
 Stop Logging

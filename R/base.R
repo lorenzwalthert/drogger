@@ -16,8 +16,11 @@
 #' You can find the last log file with `find_last_log()`.
 #'
 #' @docType package
-NULL
-
+#' @importFrom magrittr %>%
+"_PACKAGE"
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(c("."))
+}
 
 #' Returns the name of the background logger
 background_file_logger <- function() {
@@ -29,6 +32,9 @@ background_file_logger <- function() {
 #'
 #' These are wrappers around [futile.logger::flog_error()] and friends. They
 #' write to the background logger by default and use `...` for message creation.
+#' @param logger The loging function to use.
+#' @param name The name of the logger to use.
+#' @param ... Message passed to the logger via `c(...)`.
 flog_template <- function(logger, ..., name = background_file_logger()) {
   logger(paste0(c(...), collapse = ""), name = name)
 }
@@ -73,21 +79,24 @@ flog_init <- function(file_name = file.path("logs", "all.txt"),
 
 #' Start logging
 #'
-#'
+#' @param threshold  The new threshold for the given logger.
+#' @param name The name of the logger.
+#' @param msg An initial message to pass to the logger.
 flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
-                       msg = "Started drake::make() ") {
+                       msg = "Started logging run") {
   timestamp <- paste0(format(Sys.time(), timestamp_format()), ".txt")
   flog_init(file.path("logs", timestamp), name)
-  futile.logger::flog.threshold(threshold)
+  futile.logger::flog.threshold(threshold, name)
   flog_info(msg, paste(rep("-", 20), collapse = ""))
 
   writeLines(timestamp, "logs/.current")
 }
 
 #' Stop Logging
+#' @inheritParams flog_start
 flog_stop <- function(name = background_file_logger(),
-                      msg = "Completed drake::make() ") {
+                      msg = "Completed logging run") {
   flog_info(msg, paste(rep("-", 20), collapse = ""))
   location_log_current_meta <- "logs/.current"
   location_log_current <- "logs/current.txt"
