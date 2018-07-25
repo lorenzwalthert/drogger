@@ -20,7 +20,7 @@ Providing utilities for storing and accessing logs
 
 All logs are stored under `./logs`
 
--   `flog_start()` initiazes a logger that writes to a new file with a time stamp.
+-   `flog_start()` initializes a logger that writes to a new file with a time stamp.
 -   `flog_stop()` ends writing to the open connection, adding all content from the current run to a log that contains all logged lines.
 -   `open_log()` opens a log, by default the last log, which is found via `find_last_log()`
 
