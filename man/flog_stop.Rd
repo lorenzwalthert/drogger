@@ -4,7 +4,8 @@
 \alias{flog_stop}
 \title{Stop Logging}
 \usage{
-flog_stop(name = background_file_logger(), msg = "Completed logging run")
+flog_stop(name = background_file_logger(),
+  msg = "Completed logging run")
 }
 \arguments{
 \item{name}{The name of the logger.}

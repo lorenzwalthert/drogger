@@ -4,8 +4,8 @@
 \alias{flog_start}
 \title{Start logging}
 \usage{
-flog_start(threshold = futile.logger::INFO, name = background_file_logger(),
-  msg = "Started logging run")
+flog_start(threshold = futile.logger::INFO,
+  name = background_file_logger(), msg = "Started logging run")
 }
 \arguments{
 \item{threshold}{The new threshold for the given logger.}

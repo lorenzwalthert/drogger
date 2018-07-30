@@ -69,6 +69,7 @@ timestamp_format <- function() {
 #'
 #' @param file_name The name fo the file where the log should be saved to
 #' @param name The name of the logger.
+#' @export
 flog_init <- function(file_name = file.path("logs", "all.txt"),
                       name = background_file_logger()) {
   futile.logger::flog.appender(
@@ -82,6 +83,7 @@ flog_init <- function(file_name = file.path("logs", "all.txt"),
 #' @param threshold  The new threshold for the given logger.
 #' @param name The name of the logger.
 #' @param msg An initial message to pass to the logger.
+#' @export
 flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
                        msg = "Started logging run") {
@@ -95,6 +97,7 @@ flog_start <- function(threshold = futile.logger::INFO,
 
 #' Stop Logging
 #' @inheritParams flog_start
+#' @export
 flog_stop <- function(name = background_file_logger(),
                       msg = "Completed logging run") {
   flog_info(msg, paste(rep("-", 20), collapse = ""))
