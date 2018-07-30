@@ -88,6 +88,7 @@ flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
                        msg = "Started logging run") {
   timestamp <- paste0(format(Sys.time(), timestamp_format()), ".txt")
+  fs::dir_create("logs")
   flog_init(file.path("logs", timestamp), name)
   futile.logger::flog.threshold(threshold, name)
   flog_info(msg, paste(rep("-", 20), collapse = ""))
