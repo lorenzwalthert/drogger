@@ -88,7 +88,7 @@ flog_init <- function(file_name = file.path("logs", "all.txt"),
 #' @inheritParams futile.logger::flog.threshold
 #' @export
 flog_threshold <- function(treshold, name) {
-  futile.logger::flog.threshold(thresold, name)
+  futile.logger::flog.threshold(treshold, name)
 }
 
 #' Start logging
