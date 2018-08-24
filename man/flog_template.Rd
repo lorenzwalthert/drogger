@@ -2,6 +2,7 @@
 % Please edit documentation in R/base.R
 \name{flog_template}
 \alias{flog_template}
+\alias{flog_trace}
 \alias{flog_info}
 \alias{flog_debug}
 \alias{flog_warn}
@@ -10,6 +11,8 @@
 \title{Loggers}
 \usage{
 flog_template(logger, ..., name = background_file_logger())
+
+flog_trace(...)
 
 flog_info(...)
 

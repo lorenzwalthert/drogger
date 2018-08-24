@@ -41,6 +41,10 @@ flog_template <- function(logger, ..., name = background_file_logger()) {
 
 #' @rdname flog_template
 #' @export
+flog_trace <- purrr::partial(flog_template, logger = futile.logger::flog.trace)
+
+#' @rdname flog_template
+#' @export
 flog_info <- purrr::partial(flog_template, logger = futile.logger::flog.info)
 
 #' @rdname flog_template
@@ -76,6 +80,15 @@ flog_init <- function(file_name = file.path("logs", "all.txt"),
     futile.logger::appender.file(file_name),
     name = name
   )
+}
+
+#' Define the threshold for logging
+#'
+#' Wrapper around [flog.threshold()].
+#' @inheritParams futile.logger::flog.threshold
+#' @export
+flog_threshold <- function(treshold, name) {
+  futile.logger::flog.threshold(thresold, name)
 }
 
 #' Start logging
