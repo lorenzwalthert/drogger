@@ -1,0 +1,17 @@
+# API for drogger package
+
+## Exported functions
+
+find_last_log()
+flog_debug(...)
+flog_error(...)
+flog_fatal(...)
+flog_info(...)
+flog_init(file_name = file.path("logs", "all.txt"), name = background_file_logger())
+flog_start(threshold = futile.logger::INFO, name = background_file_logger(), msg = "Started logging run")
+flog_stop(name = background_file_logger(), msg = "Completed logging run")
+flog_threshold(treshold, name)
+flog_trace(...)
+flog_warn(...)
+open_log(file = find_last_log())
+parse_log(path)

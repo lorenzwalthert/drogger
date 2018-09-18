@@ -1,0 +1,2 @@
+INFO [2018-09-11 23:59:29] Started logging run--------------------
+INFO [2018-09-11 00:01:21] Scraping action_url https://www.immowelt.de/liste/bl-nordrhein-westfalen/wohnungen/mieten?sort=createdate%2Bdesc
