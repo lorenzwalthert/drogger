@@ -100,13 +100,17 @@ flog_threshold <- function(treshold, name) {
 flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
                        msg = "Started logging run") {
-  timestamp <- paste0(format(Sys.time(), timestamp_format()), ".txt")
+  timestamp <- paste0(generate_time_stamp(), ".txt")
   fs::dir_create("logs")
   flog_init(file.path("logs", timestamp), name)
   futile.logger::flog.threshold(threshold, name)
   flog_info(msg, paste(rep("-", 20), collapse = ""))
 
   writeLines(timestamp, "logs/.current")
+}
+
+generate_time_stamp <- function(time = Sys.time()) {
+  format(time, timestamp_format())
 }
 
 #' Stop Logging
@@ -129,27 +133,4 @@ flog_stop <- function(name = background_file_logger(),
     writeLines(c(full_log, rev(log_current)), location_log_all)
     unlink(location_log_current_meta)
   }
-}
-
-#' Open a log
-#'
-#' @param file The path to a file with the log to open.
-#' @export
-open_log <- function(file = find_last_log()) {
-  rstudioapi::navigateToFile(file)
-}
-
-#' Find the last log from file names
-#'
-#' @export
-find_last_log <- function() {
-  dates_dec <- fs::dir_info("logs/", regexp = "--")$path %>%
-    basename() %>%
-    substr(1, nchar(.) - 4) %>%
-    lubridate::parse_date_time(timestamp_format()) %>%
-    sort(decreasing = TRUE)
-  file <- format(lubridate::as_datetime(dates_dec[1]),
-                 format = timestamp_format()
-  )
-  paste0("logs/", file, ".txt", collapse = "")
 }
