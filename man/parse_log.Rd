@@ -10,6 +10,6 @@ parse_log(path)
 \item{path}{The path to a file that is a log.}
 }
 \description{
-Parses a log that follows the structure used by [futile.loggeer], i.e.
+Parses a log that follows the structure used by `futile.loggeer`, i.e.
 `INFO [2018-09-11 23:59:29] Here is a message.`
 }

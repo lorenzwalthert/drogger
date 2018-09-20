@@ -31,7 +31,7 @@ find_last_log <- function() {
 #'   indicates a time stamped directory under "logs".
 #' @param create_empty Whether or not to create an empty directory.
 #' @export
-archive_log <- function(regex = ".*",
+archive_logs <- function(regex = ".*",
                         log_dir = "logs",
                         new_dir = NULL,
                         create_empty = FALSE) {
