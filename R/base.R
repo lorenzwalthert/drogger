@@ -23,6 +23,7 @@ if (getRversion() >= "2.15.1") {
 }
 
 #' Returns the name of the background logger
+#' @export
 background_file_logger <- function() {
   "background_logger"
 }
