@@ -142,6 +142,5 @@ flog_stop <- function(name = background_file_logger(),
     full_log <- readLines(location_log_all)
     if (append) writeLines(c(full_log, rev(log_current)), location_log_all)
     unlink(location_log_current_meta)
-    invisible(log_path_current)
   }
 }
