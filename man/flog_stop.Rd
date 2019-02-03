@@ -12,6 +12,9 @@ flog_stop(name = background_file_logger(),
 
 \item{msg}{An initial message to pass to the logger.}
 }
+\value{
+Invisibly returns the path to the file that contains the log.
+}
 \description{
 Stop Logging
 }

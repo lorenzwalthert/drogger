@@ -97,6 +97,8 @@ flog_threshold <- function(treshold, name) {
 #' @param threshold  The new threshold for the given logger.
 #' @param name The name of the logger.
 #' @param msg An initial message to pass to the logger.
+#' @return
+#' Invisibly returns the path to the file that contains the log.
 #' @export
 flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
@@ -108,6 +110,7 @@ flog_start <- function(threshold = futile.logger::INFO,
   flog_info(msg, paste(rep("-", 20), collapse = ""))
 
   writeLines(timestamp, "logs/.current")
+  invisible(timestamp)
 }
 
 generate_time_stamp <- function(time = Sys.time()) {
@@ -116,6 +119,8 @@ generate_time_stamp <- function(time = Sys.time()) {
 
 #' Stop Logging
 #' @inheritParams flog_start
+#' @return
+#' Invisibly returns the path to the file that contains the log.
 #' @export
 flog_stop <- function(name = background_file_logger(),
                       msg = "Completed logging run") {
@@ -125,13 +130,15 @@ flog_stop <- function(name = background_file_logger(),
   location_log_all <- "logs/all.txt"
 
   if (file.exists(location_log_current_meta)) {
-    log_current <- location_log_current_meta %>%
+    log_path_current <- location_log_current_meta %>%
       readLines() %>%
-      file.path("logs", .) %>%
+      file.path("logs", .)
+    log_current <- log_path_current %>%
       readLines()
     fs::file_create(location_log_all)
     full_log <- readLines(location_log_all)
     writeLines(c(full_log, rev(log_current)), location_log_all)
     unlink(location_log_current_meta)
+    invisible(log_path_current)
   }
 }

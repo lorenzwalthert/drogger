@@ -14,6 +14,9 @@ flog_start(threshold = futile.logger::INFO,
 
 \item{msg}{An initial message to pass to the logger.}
 }
+\value{
+Invisibly returns the path to the file that contains the log.
+}
 \description{
 Start logging
 }

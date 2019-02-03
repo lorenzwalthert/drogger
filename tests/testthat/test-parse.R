@@ -6,3 +6,16 @@ test_that("can parse a log", {
     parsed, test_path("reference-objects/parsed-log")
   )
 })
+
+test_that("Can do basic logging", {
+  temp <- fs::path_temp()
+  withr::with_dir(temp, {
+    flog_start()
+    flog_info("Hi")
+    file <- flog_stop()
+    parsed <- parse_log(file)
+    expect_equal(nrow(parsed), 3)
+    parsed
+    expect_match(parsed$message[2], "Hi")
+  })
+})
