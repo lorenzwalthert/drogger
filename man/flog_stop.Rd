@@ -5,12 +5,15 @@
 \title{Stop Logging}
 \usage{
 flog_stop(name = background_file_logger(),
-  msg = "Completed logging run")
+  msg = "Completed logging run", append = FALSE)
 }
 \arguments{
 \item{name}{The name of the logger.}
 
 \item{msg}{An initial message to pass to the logger.}
+
+\item{append}{Whether or not to append the data from the most recent log
+to the file logs/all.txt.}
 }
 \value{
 Invisibly returns the path to the file that contains the log.

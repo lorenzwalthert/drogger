@@ -119,11 +119,14 @@ generate_time_stamp <- function(time = Sys.time()) {
 
 #' Stop Logging
 #' @inheritParams flog_start
+#' @param append Whether or not to append the data from the most recent log
+#'   to the file logs/all.txt.
 #' @return
 #' Invisibly returns the path to the file that contains the log.
 #' @export
 flog_stop <- function(name = background_file_logger(),
-                      msg = "Completed logging run") {
+                      msg = "Completed logging run",
+                      append = FALSE) {
   flog_info(msg, paste(rep("-", 20), collapse = ""))
   location_log_current_meta <- "logs/.current"
   location_log_current <- "logs/current.txt"
@@ -137,7 +140,7 @@ flog_stop <- function(name = background_file_logger(),
       readLines()
     fs::file_create(location_log_all)
     full_log <- readLines(location_log_all)
-    writeLines(c(full_log, rev(log_current)), location_log_all)
+    if (append) writeLines(c(full_log, rev(log_current)), location_log_all)
     unlink(location_log_current_meta)
     invisible(log_path_current)
   }
