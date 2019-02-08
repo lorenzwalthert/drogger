@@ -5,7 +5,7 @@
 #' @param communicator The bare name of a function that communicates the
 #'   how many logs are deleted.
 #' @export
-delete_logs <- function(relieve_date = Sys.Date() - months(6),
+delete_logs <- function(relieve_date = Sys.Date() - 180,
                         communicator = flog_info) {
   paths <- fs::dir_ls("logs", type = "file")
   dates <- paths %>%
@@ -14,7 +14,8 @@ delete_logs <- function(relieve_date = Sys.Date() - months(6),
     as.Date(format = "%Y-%m-%d--%H-%M-%S", optional = TRUE)
   to_delete <- na.omit(paths[dates < relieve_date])
   communicator(
-    "Deleting ", length(to_delete), " logs older than ", as.character(relieve_date), "."
+    "Deleting ", length(to_delete), " logs older than ",
+    as.character(relieve_date), "."
   )
   fs::file_delete(to_delete)
 }

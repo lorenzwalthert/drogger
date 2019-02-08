@@ -4,8 +4,7 @@
 \alias{delete_logs}
 \title{Delete logs with a checkpoint older than a reference date}
 \usage{
-delete_logs(relieve_date = Sys.Date() - months(6),
-  communicator = flog_info)
+delete_logs(relieve_date = Sys.Date() - 180, communicator = flog_info)
 }
 \arguments{
 \item{communicator}{The bare name of a function that communicates the
