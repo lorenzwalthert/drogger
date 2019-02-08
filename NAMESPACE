@@ -2,6 +2,7 @@
 
 export(archive_logs)
 export(background_file_logger)
+export(delete_logs)
 export(find_last_log)
 export(flog_debug)
 export(flog_error)
