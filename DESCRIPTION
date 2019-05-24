@@ -1,7 +1,7 @@
 Type: Package
 Package: drogger
 Title: What the Package Does (Title Case)
-Version: 0.1.1.9002
+Version: 0.1.9003
 Authors@R: person("Lorenz", "Walthert", role = c("cre", "aut"), email = "lorenz.walthert@icloud.com")
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
