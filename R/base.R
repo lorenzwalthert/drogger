@@ -97,20 +97,27 @@ flog_threshold <- function(treshold, name) {
 #' @param threshold  The new threshold for the given logger.
 #' @param name The name of the logger.
 #' @param msg An initial message to pass to the logger.
+#' @param root The root logging directory. Sometimes, it might be convenient to
+#'   log to a temporary directory and then copy the log later somewhere else.
 #' @return
 #' Invisibly returns the path to the file that contains the log.
 #' @export
 flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
-                       msg = "Started logging run") {
-  timestamp <- paste0(generate_time_stamp(), ".txt")
-  fs::dir_create("logs")
-  flog_init(file.path("logs", timestamp), name)
-  futile.logger::flog.threshold(threshold, name)
-  flog_info(msg, paste(rep("-", 20), collapse = ""))
+                       msg = "Started logging run",
+                       root = ".") {
+  withr::with_dir(
+    root, {
+      timestamp <- paste0(generate_time_stamp(), ".txt")
+      fs::dir_create("logs")
+      flog_init(fs::path(root, "logs", timestamp), name)
+      futile.logger::flog.threshold(threshold, name)
+      flog_info(msg, paste(rep("-", 20), collapse = ""))
 
-  writeLines(timestamp, "logs/.current")
-  invisible(timestamp)
+      writeLines(timestamp, fs::path(root, "logs", ".current"))
+      invisible(timestamp)
+    }
+  )
 }
 
 generate_time_stamp <- function(time = Sys.time()) {

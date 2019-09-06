@@ -5,7 +5,8 @@
 \title{Start logging}
 \usage{
 flog_start(threshold = futile.logger::INFO,
-  name = background_file_logger(), msg = "Started logging run")
+  name = background_file_logger(), msg = "Started logging run",
+  root = ".")
 }
 \arguments{
 \item{threshold}{The new threshold for the given logger.}
@@ -13,6 +14,9 @@ flog_start(threshold = futile.logger::INFO,
 \item{name}{The name of the logger.}
 
 \item{msg}{An initial message to pass to the logger.}
+
+\item{root}{The root logging directory. Sometimes, it might be convenient to
+log to a temporary directory and then copy the log later somewhere else.}
 }
 \value{
 Invisibly returns the path to the file that contains the log.
