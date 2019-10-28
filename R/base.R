@@ -106,6 +106,7 @@ flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
                        msg = "Started logging run",
                        root = ".") {
+  fs::dir_create(root)
   withr::with_dir(
     root, {
       timestamp <- paste0(generate_time_stamp(), ".txt")
