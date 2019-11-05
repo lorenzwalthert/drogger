@@ -12,7 +12,7 @@ open_log <- function(file = find_last_log()) {
 #' @param root The root logging directory.
 #' @export
 find_last_log <- function(root = ".") {
-  logs_dir <- fs::path(root, "logs/")
+  logs_dir <- fs::path(root, "logs")
   dates_dec <- fs::dir_info(logs_dir, regexp = "--")$path %>%
     basename() %>%
     substr(1, nchar(.) - 4) %>%
@@ -21,7 +21,7 @@ find_last_log <- function(root = ".") {
   file <- format(lubridate::as_datetime(dates_dec[1]),
                  format = timestamp_format()
   )
-  paste0(logs_dir, file, ".txt", collapse = "")
+  paste0(fs::path(logs_dir, file), ".txt", collapse = "")
 }
 
 
