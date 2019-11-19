@@ -22,5 +22,8 @@ log to a temporary directory and then copy the log later somewhere else.}
 Invisibly returns the path to the file that contains the log.
 }
 \description{
-Start logging
+Note that chaning the absolute path under which the logger is initialized
+and then issuing a logging statement will result in an error because the
+absolute path for logging is used so logging statements can be created from
+arbitrary working directories (i.e. within [withr::with_dir()]).
 }

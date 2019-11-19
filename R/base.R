@@ -94,6 +94,10 @@ flog_threshold <- function(treshold, name) {
 
 #' Start logging
 #'
+#' Note that chaning the absolute path under which the logger is initialized
+#' and then issuing a logging statement will result in an error because the
+#' absolute path for logging is used so logging statements can be created from
+#' arbitrary working directories (i.e. within [withr::with_dir()]).
 #' @param threshold  The new threshold for the given logger.
 #' @param name The name of the logger.
 #' @param msg An initial message to pass to the logger.
@@ -106,19 +110,16 @@ flog_start <- function(threshold = futile.logger::INFO,
                        name = background_file_logger(),
                        msg = "Started logging run",
                        root = ".") {
+  root <- fs::path_abs(root)
   fs::dir_create(root)
-  withr::with_dir(
-    root, {
-      timestamp <- paste0(generate_time_stamp(), ".txt")
-      fs::dir_create("logs")
-      flog_init(fs::path(root, "logs", timestamp), name)
-      futile.logger::flog.threshold(threshold, name)
-      flog_info(msg, paste(rep("-", 20), collapse = ""))
+  timestamp <- paste0(generate_time_stamp(), ".txt")
+  fs::dir_create(fs::path(root, "logs"))
+  flog_init(fs::path(root, "logs", timestamp), name)
+  futile.logger::flog.threshold(threshold, name)
+  flog_info(msg, paste(rep("-", 20), collapse = ""))
 
-      writeLines(timestamp, fs::path(root, "logs", ".current"))
-      invisible(timestamp)
-    }
-  )
+  writeLines(timestamp, fs::path(root, "logs", ".current"))
+  invisible(timestamp)
 }
 
 generate_time_stamp <- function(time = Sys.time()) {
