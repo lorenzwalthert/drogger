@@ -4,7 +4,8 @@
 [![Travis build
 status](https://travis-ci.org/lorenzwalthert/drogger.svg?branch=master)](https://travis-ci.org/lorenzwalthert/drogger)
 
-this is nit sctively developed. Don't use it. 
+this is not acyively developed. Don't use it. 
+
 # drogger
 
 The goal of drogger is twofold:
